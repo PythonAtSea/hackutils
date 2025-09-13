@@ -17,7 +17,20 @@ import {
   SidebarGroupContent,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { Heart, Clock, Timer, QrCode, Gpu, HandCoins } from "lucide-react";
+import {
+  Heart,
+  Clock,
+  Timer,
+  QrCode,
+  Gpu,
+  HandCoins,
+  AlarmClock,
+  ScanSearch,
+  Dices,
+  Hash,
+  Thermometer,
+  RulerDimensionLine,
+} from "lucide-react";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -67,6 +80,37 @@ export default function RootLayout({
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/countdown">
+                          <AlarmClock className="size-4" />
+                          <span>countdown</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>unit conversions</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/temperature">
+                          <Thermometer className="size-4" />
+                          <span>temperature</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/length">
+                          <RulerDimensionLine className="size-4" />
+                          <span>length</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
@@ -74,14 +118,6 @@ export default function RootLayout({
                 <SidebarGroupLabel>random</SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link href="/qrcode">
-                          <QrCode className="size-4" />
-                          <span>qr code</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild>
                         <Link href="/uuid">
@@ -95,6 +131,45 @@ export default function RootLayout({
                         <Link href="/coinflip">
                           <HandCoins className="size-4" />
                           <span>coin flip</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/randint">
+                          <Dices className="size-4" />
+                          <span>randint</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/hash">
+                          <Hash className="size-4" />
+                          <span>hash</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarGroupLabel>visual codes</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/qrcode">
+                          <QrCode className="size-4" />
+                          <span>qr code</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/apriltag">
+                          <ScanSearch className="size-4" />
+                          <span>apriltag</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
