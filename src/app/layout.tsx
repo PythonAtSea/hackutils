@@ -197,13 +197,14 @@ export default function RootLayout({
             </SidebarContent>
             <SidebarFooter>
               <div className="flex flex-col gap-2 p-2 text-sm">
-                <p className="">
+                <p>
                   made with
                   <Heart
                     size={14}
                     className="inline-block animate-pulse text-red-800 [animation-duration:3s] mx-2"
                   />
-                  by pythonatsea
+                  by{" "}
+                  <Link href="https://github.com/pythonatsea">pythonatsea</Link>
                 </p>
               </div>
             </SidebarFooter>
