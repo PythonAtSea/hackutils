@@ -1,0 +1,18 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/apriltag/page": "app/apriltag/page.js",
+  "/clock/page": "app/clock/page.js",
+  "/coinflip/page": "app/coinflip/page.js",
+  "/countdown/page": "app/countdown/page.js",
+  "/datamatrix/page": "app/datamatrix/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/hash/page": "app/hash/page.js",
+  "/length/page": "app/length/page.js",
+  "/page": "app/page.js",
+  "/qrcode/page": "app/qrcode/page.js",
+  "/randint/page": "app/randint/page.js",
+  "/stopwatch/page": "app/stopwatch/page.js",
+  "/temperature/page": "app/temperature/page.js",
+  "/uuid/page": "app/uuid/page.js",
+  "/weight/page": "app/weight/page.js"
+}

@@ -1,0 +1,3 @@
+module.exports=[27850,a=>{"use strict";a.s(["default",()=>d]);var b=a.i(87924),c=a.i(72131);function d(){let[a,d]=(0,c.useState)(new Date);return(0,c.useEffect)(()=>{let a=setInterval(()=>{d(new Date)},1);return()=>clearInterval(a)},[]),(0,b.jsx)("div",{className:"flex flex-col items-center justify-center py-2 size-full gap-4",children:(0,b.jsx)("h1",{className:"text-9xl font-bold",children:a.getHours().toString().padStart(2,"0")+":"+a.getMinutes().toString().padStart(2,"0")+":"+a.getSeconds().toString().padStart(2,"0")+"."+a.getMilliseconds().toString().padStart(3,"0")})})}}];
+
+//# sourceMappingURL=src_app_clock_page_tsx_f6b0c6db._.js.map

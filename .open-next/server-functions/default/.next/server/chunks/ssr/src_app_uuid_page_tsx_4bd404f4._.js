@@ -1,0 +1,3 @@
+module.exports=[61734,a=>{"use strict";a.s(["default",()=>e]);var b=a.i(87924),c=a.i(99570),d=a.i(72131);function e(){let[a,e]=(0,d.useState)("");return(0,d.useEffect)(()=>{e(crypto.randomUUID())},[]),(0,b.jsxs)("div",{className:"flex flex-row items-center justify-center py-2 size-full gap-4",children:[(0,b.jsx)("p",{children:a}),(0,b.jsx)(c.Button,{onClick:()=>e(crypto.randomUUID()),children:"generate"})]})}}];
+
+//# sourceMappingURL=src_app_uuid_page_tsx_4bd404f4._.js.map

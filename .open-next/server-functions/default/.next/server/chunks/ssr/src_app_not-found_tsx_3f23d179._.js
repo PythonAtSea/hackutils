@@ -1,0 +1,3 @@
+module.exports=[3363,a=>{"use strict";a.s(["default",()=>c]);var b=a.i(7997);function c(){return(0,b.jsx)("div",{className:"flex items-center justify-center py-2 size-full",children:(0,b.jsxs)("div",{className:"relative",children:[(0,b.jsx)("h1",{className:"text-[350px] font-bold text-muted",children:"404"}),(0,b.jsx)("p",{className:"absolute inset-0 flex items-center justify-center text-7xl text-red-700 font-bold whitespace-nowrap",children:"Not Found"})]})})}}];
+
+//# sourceMappingURL=src_app_not-found_tsx_3f23d179._.js.map
