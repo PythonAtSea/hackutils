@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import bwipjs from "bwip-js";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Page() {
   const [data, setData] = useState("");
