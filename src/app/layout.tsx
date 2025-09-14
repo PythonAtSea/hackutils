@@ -31,6 +31,7 @@ import {
   Thermometer,
   RulerDimensionLine,
   Anvil,
+  ScanLine,
 } from "lucide-react";
 
 const geistMono = Geist_Mono({
@@ -179,6 +180,14 @@ export default function RootLayout({
                         <Link href="/apriltag">
                           <ScanSearch className="size-4" />
                           <span>apriltag</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/datamatrix">
+                          <ScanLine className="size-4" />
+                          <span>datamatrix</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
