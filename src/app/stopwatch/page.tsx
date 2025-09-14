@@ -6,7 +6,7 @@ import React, { useRef, useState, useEffect } from "react";
 export default function Page() {
   const [elapsed, setElapsed] = useState(0);
   const [running, setRunning] = useState(false);
-  const laps = useRef<number[]>([]);
+  const [laps, setLaps] = useState<number[]>([]);
   const startTimeRef = useRef<Date | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -41,7 +41,7 @@ export default function Page() {
 
   const handleReset = () => {
     setElapsed(0);
-    laps.current = [];
+    setLaps([]);
     startTimeRef.current = null;
   };
 
@@ -50,8 +50,9 @@ export default function Page() {
   };
 
   const handleLap = () => {
-    const lapTime = elapsed - (laps.current.reduce((a, b) => a + b, 0) || 0);
-    laps.current.push(lapTime);
+    const lapTime = elapsed - (laps.reduce((a, b) => a + b, 0) || 0);
+    const newLaps = [...laps, lapTime];
+    setLaps(newLaps);
   };
 
   const formatTime = (ms: number) => {
@@ -88,10 +89,13 @@ export default function Page() {
           </>
         )}
       </div>
-      {laps.current.length > 0 && (
+      {laps.length > 0 && (
         <div className="flex flex-col items-center justify-center py-2 gap-4">
-          {laps.current.map((lap, index) => (
-            <div key={index} className={`text-2xl font-bold`}>
+          {laps.map((lap, index) => (
+            <div
+              key={index}
+              className={`text-2xl font-bold `}
+            >
               {formatTime(lap)}
             </div>
           ))}

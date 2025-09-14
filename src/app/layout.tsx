@@ -30,6 +30,7 @@ import {
   Hash,
   Thermometer,
   RulerDimensionLine,
+  Anvil,
 } from "lucide-react";
 
 const geistMono = Geist_Mono({
@@ -108,6 +109,14 @@ export default function RootLayout({
                         <Link href="/length">
                           <RulerDimensionLine className="size-4" />
                           <span>length</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link href="/weight">
+                          <Anvil className="size-4" />
+                          <span>weight</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
