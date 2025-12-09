@@ -23,15 +23,15 @@ export default function Page() {
               Number(
                 convert(Number(e.target.value), "fahrenheit")
                   .to("celsius")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
             setKelvin(
               Number(
                 convert(Number(e.target.value), "fahrenheit")
                   .to("kelvin")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
           }}
         />
@@ -48,15 +48,15 @@ export default function Page() {
               Number(
                 convert(Number(e.target.value), "celsius")
                   .to("fahrenheit")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
             setKelvin(
               Number(
                 convert(Number(e.target.value), "celsius")
                   .to("kelvin")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
           }}
         />
@@ -73,15 +73,15 @@ export default function Page() {
               Number(
                 convert(Number(e.target.value), "kelvin")
                   .to("celsius")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
             setFahrenheit(
               Number(
                 convert(Number(e.target.value), "kelvin")
                   .to("fahrenheit")
-                  .toFixed(2)
-              )
+                  .toFixed(2),
+              ),
             );
           }}
         />

@@ -24,7 +24,7 @@ export default function Page() {
   const convertLeftToRight = (
     val: string,
     lUnit: Unit | "",
-    rUnit: Unit | ""
+    rUnit: Unit | "",
   ) => {
     if (!isValidNumber(val) || !lUnit || !rUnit) {
       setRightValue("");
@@ -41,7 +41,7 @@ export default function Page() {
   const convertRightToLeft = (
     val: string,
     lUnit: Unit | "",
-    rUnit: Unit | ""
+    rUnit: Unit | "",
   ) => {
     if (!isValidNumber(val) || !lUnit || !rUnit) {
       setLeftValue("");
@@ -89,11 +89,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
-      <Input
-        type="number"
-        onChange={handleLeftValueChange}
-        value={leftValue}
-      />
+      <Input type="number" onChange={handleLeftValueChange} value={leftValue} />
       <Select onValueChange={handleLeftUnitChange} value={leftUnit}>
         <SelectTrigger>
           <SelectValue placeholder="unit of length" />

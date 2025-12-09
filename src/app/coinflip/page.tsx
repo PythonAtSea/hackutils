@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Page() {
   const [result, setResult] = useState<"heads" | "tails" | null>(null);

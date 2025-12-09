@@ -34,7 +34,7 @@ export function GridToSVG({ grid, cellSize = 40, id }: GridToSVGProps) {
             height={cellSize}
             fill={colorMap[cell] || "#888"}
           />
-        ))
+        )),
       )}
     </svg>
   );

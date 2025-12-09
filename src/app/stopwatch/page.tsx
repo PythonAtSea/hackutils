@@ -92,10 +92,7 @@ export default function Page() {
       {laps.length > 0 && (
         <div className="flex flex-col items-center justify-center py-2 gap-4">
           {laps.map((lap, index) => (
-            <div
-              key={index}
-              className={`text-2xl font-bold `}
-            >
+            <div key={index} className={`text-2xl font-bold `}>
               {formatTime(lap)}
             </div>
           ))}

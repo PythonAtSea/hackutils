@@ -59,34 +59,52 @@ export default function Page() {
           (tagFamily === "tag36h11"
             ? tag36h11.render(Math.min(tagId, tagConfig36h11.codes.length - 1))
             : tagFamily === "tag16h5"
-            ? tag16h5.render(Math.min(tagId, tagConfig16h5.codes.length - 1))
-            : tagFamily === "tag25h9"
-            ? tag25h9.render(Math.min(tagId, tagConfig25h9.codes.length - 1))
-            : tagFamily === "tag36h9"
-            ? tag36h9.render(Math.min(tagId, tagConfig36h9.codes.length - 1))
-            : tagFamily === "tag36h10"
-            ? tag36h10.render(Math.min(tagId, tagConfig36h10.codes.length - 1))
-            : tagFamily === "tagCircle21h7"
-            ? tagCircle21h7.render(
-                Math.min(tagId, tagConfigCircle21h7.codes.length - 1)
-              )
-            : tagFamily === "tagCircle49h12"
-            ? tagCircle49h12.render(
-                Math.min(tagId, tagConfigCircle49h12.codes.length - 1)
-              )
-            : tagFamily === "tagCustom48h12"
-            ? tagCustom48h12.render(
-                Math.min(tagId, tagConfigCustom48h12.codes.length - 1)
-              )
-            : tagFamily === "tagStandard41h12"
-            ? tagStandard41h12.render(
-                Math.min(tagId, tagConfigStandard41h12.codes.length - 1)
-              )
-            : tagFamily === "tagStandard52h13"
-            ? tagStandard52h13.render(
-                Math.min(tagId, tagConfigStandard52h13.codes.length - 1)
-              )
-            : null) || [[]]
+              ? tag16h5.render(Math.min(tagId, tagConfig16h5.codes.length - 1))
+              : tagFamily === "tag25h9"
+                ? tag25h9.render(
+                    Math.min(tagId, tagConfig25h9.codes.length - 1),
+                  )
+                : tagFamily === "tag36h9"
+                  ? tag36h9.render(
+                      Math.min(tagId, tagConfig36h9.codes.length - 1),
+                    )
+                  : tagFamily === "tag36h10"
+                    ? tag36h10.render(
+                        Math.min(tagId, tagConfig36h10.codes.length - 1),
+                      )
+                    : tagFamily === "tagCircle21h7"
+                      ? tagCircle21h7.render(
+                          Math.min(tagId, tagConfigCircle21h7.codes.length - 1),
+                        )
+                      : tagFamily === "tagCircle49h12"
+                        ? tagCircle49h12.render(
+                            Math.min(
+                              tagId,
+                              tagConfigCircle49h12.codes.length - 1,
+                            ),
+                          )
+                        : tagFamily === "tagCustom48h12"
+                          ? tagCustom48h12.render(
+                              Math.min(
+                                tagId,
+                                tagConfigCustom48h12.codes.length - 1,
+                              ),
+                            )
+                          : tagFamily === "tagStandard41h12"
+                            ? tagStandard41h12.render(
+                                Math.min(
+                                  tagId,
+                                  tagConfigStandard41h12.codes.length - 1,
+                                ),
+                              )
+                            : tagFamily === "tagStandard52h13"
+                              ? tagStandard52h13.render(
+                                  Math.min(
+                                    tagId,
+                                    tagConfigStandard52h13.codes.length - 1,
+                                  ),
+                                )
+                              : null) || [[]]
         }
         id="tag"
       />
