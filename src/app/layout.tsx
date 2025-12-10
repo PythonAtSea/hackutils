@@ -33,6 +33,7 @@ import {
   Anvil,
   ScanLine,
 } from "lucide-react";
+import { KeyboardLegend } from "@/components/KeyboardLegend";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -219,6 +220,7 @@ export default function RootLayout({
               </div>
             </main>
           </SidebarInset>
+          <KeyboardLegend />
         </SidebarProvider>
       </body>
     </html>
