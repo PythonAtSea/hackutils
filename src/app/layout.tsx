@@ -11,11 +11,11 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarInset,
-  SidebarTrigger,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
 } from "@/components/ui/sidebar";
+import { FloatingSidebarTrigger } from "@/components/FloatingSidebarTrigger";
 import Link from "next/link";
 import {
   Heart,
@@ -211,9 +211,6 @@ export default function RootLayout({
             </SidebarFooter>
           </Sidebar>
           <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b justify-between">
-              <SidebarTrigger />
-            </header>
             <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
               <div className="min-h-[100vh_-_theme(spacing.16)] flex-1 rounded-xl p-4">
                 {children}
@@ -221,6 +218,7 @@ export default function RootLayout({
             </main>
           </SidebarInset>
           <KeyboardLegend />
+          <FloatingSidebarTrigger />
         </SidebarProvider>
       </body>
     </html>
