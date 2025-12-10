@@ -67,14 +67,14 @@ export function KeyboardLegend() {
               >
                 <KbdGroup>
                   {shortcut.keys.map((key, keyIndex) => (
-                    <>
+                    <div key={keyIndex}>
                       <Kbd key={keyIndex + "key"}>{key}</Kbd>
                       {keyIndex < shortcut.keys.length - 1 && (
                         <span className="mx-1" key={keyIndex + "plus"}>
                           +
                         </span>
                       )}
-                    </>
+                    </div>
                   ))}
                 </KbdGroup>
                 <p className="text-sm text-muted-foreground">
