@@ -11,11 +11,11 @@ export function KeyboardLegend() {
 
   const shortcuts = [
     {
-      keys: ["Ctrl", "?"],
+      keys: ["ctrl", "?"],
       description: "view keyboard shortcuts",
     },
     {
-      keys: ["Ctrl", "`"],
+      keys: ["ctrl", "`"],
       description: "toggle sidebar",
     },
   ];
