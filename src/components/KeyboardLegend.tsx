@@ -14,6 +14,10 @@ export function KeyboardLegend() {
       keys: ["Ctrl", "?"],
       description: "view keyboard shortcuts",
     },
+    {
+      keys: ["Ctrl", "`"],
+      description: "toggle sidebar",
+    },
   ];
 
   useEffect(() => {
@@ -57,13 +61,13 @@ export function KeyboardLegend() {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Keyboard Shortcuts</DialogTitle>
+            <DialogTitle>keyboard shortcuts</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col">
             {shortcuts.map((shortcut, index) => (
               <div
                 key={index}
-                className="flex flex-row items-center justify-between even:bg-neutral-900 p-2"
+                className="flex flex-row items-center justify-between py-1"
               >
                 <KbdGroup>
                   {shortcut.keys.map((key, keyIndex) => (
