@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -87,40 +88,72 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
-      <Input type="number" onChange={handleLeftValueChange} value={leftValue} />
-      <Select onValueChange={handleLeftUnitChange} value={leftUnit}>
-        <SelectTrigger>
-          <SelectValue placeholder="unit of weight" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="pound">pound (lb)</SelectItem>
-            <SelectItem value="kg">kilogram (kg)</SelectItem>
-            <SelectItem value="g">gram (g)</SelectItem>
-            <SelectItem value="oz">ounce (oz)</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <span className="text-2xl">=</span>
-      <Input
-        type="number"
-        onChange={handleRightValueChange}
-        value={rightValue}
-      />
-      <Select onValueChange={handleRightUnitChange} value={rightUnit}>
-        <SelectTrigger>
-          <SelectValue placeholder="unit of weight" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="pound">pound (lb)</SelectItem>
-            <SelectItem value="kg">kilogram (kg)</SelectItem>
-            <SelectItem value="g">gram (g)</SelectItem>
-            <SelectItem value="oz">ounce (oz)</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+    <div className="flex items-center justify-center size-full">
+      <div className="flex flex-row items-stretch gap-4">
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="weight-left-value">
+            weight
+          </Label>
+          <Input
+            id="weight-left-value"
+            type="number"
+            placeholder="3.5"
+            onChange={handleLeftValueChange}
+            value={leftValue}
+          />
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="weight-left-unit">
+            unit
+          </Label>
+          <Select onValueChange={handleLeftUnitChange} value={leftUnit}>
+            <SelectTrigger id="weight-left-unit">
+              <SelectValue placeholder="pounds" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="pound">pound (lb)</SelectItem>
+                <SelectItem value="kg">kilogram (kg)</SelectItem>
+                <SelectItem value="g">gram (g)</SelectItem>
+                <SelectItem value="oz">ounce (oz)</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex items-end pb-1">
+          <span className="text-2xl">=</span>
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="weight-right-value">
+            weight
+          </Label>
+          <Input
+            id="weight-right-value"
+            type="number"
+            placeholder="56"
+            onChange={handleRightValueChange}
+            value={rightValue}
+          />
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="weight-right-unit">
+            unit
+          </Label>
+          <Select onValueChange={handleRightUnitChange} value={rightUnit}>
+            <SelectTrigger id="weight-right-unit">
+              <SelectValue placeholder="kilograms" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="pound">pound (lb)</SelectItem>
+                <SelectItem value="kg">kilogram (kg)</SelectItem>
+                <SelectItem value="g">gram (g)</SelectItem>
+                <SelectItem value="oz">ounce (oz)</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
     </div>
   );
 }

@@ -61,8 +61,10 @@ export default function Page() {
       {!running && (
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-end gap-4">
-            <div className="flex flex-col gap-1">
-              <Label htmlFor="date-picker">date</Label>
+            <div className="flex flex-col">
+              <Label className="mb-1" htmlFor="date-picker">
+                date
+              </Label>
               <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                 <PopoverTrigger asChild>
                   <Button
@@ -72,7 +74,7 @@ export default function Page() {
                   >
                     {selectedDate
                       ? selectedDate.toLocaleDateString()
-                      : "pick a date"}
+                      : "7/12/1941"}
                     <ChevronDownIcon />
                   </Button>
                 </PopoverTrigger>
@@ -91,12 +93,15 @@ export default function Page() {
                 </PopoverContent>
               </Popover>
             </div>
-            <div className="flex flex-col gap-1">
-              <Label htmlFor="time-picker">time</Label>
+            <div className="flex flex-col">
+              <Label className="mb-1" htmlFor="time-picker">
+                time
+              </Label>
               <Input
                 type="time"
                 id="time-picker"
                 step="1"
+                placeholder="23:59:59"
                 value={selectedTime}
                 onChange={(e) => setSelectedTime(e.target.value)}
                 className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"

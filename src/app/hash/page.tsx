@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -27,29 +28,40 @@ export default function Page() {
       <p className="text-3xl font-bold break-all" onClick={() => setHash("")}>
         {hash}
       </p>
-      <div className="flex flex-row gap-2">
-        <Input
-          type="text"
-          placeholder="text to hash"
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-        />
-        <Select
-          value={algorithm}
-          onValueChange={(value) => {
-            setAlgorithm(value);
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="select a hashing algorithm" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="md5">md5</SelectItem>
-            <SelectItem value="sha1">sha-1</SelectItem>
-            <SelectItem value="sha256">sha-256</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex flex-row gap-4 items-end">
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="hash-text">
+            text to hash
+          </Label>
+          <Input
+            id="hash-text"
+            type="text"
+            placeholder="beep boop secret sauce"
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+          />
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="hash-algorithm">
+            hashing algorithm
+          </Label>
+          <Select
+            value={algorithm}
+            onValueChange={(value) => {
+              setAlgorithm(value);
+            }}
+          >
+            <SelectTrigger id="hash-algorithm" className="w-full">
+              <SelectValue placeholder="sha-256" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="md5">md5</SelectItem>
+              <SelectItem value="sha1">sha-1</SelectItem>
+              <SelectItem value="sha256">sha-256</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <Button onClick={handleHash}>hash</Button>
       </div>
     </div>

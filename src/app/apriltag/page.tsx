@@ -2,6 +2,7 @@
 import { GridToSVG } from "@/components/GridToSVG";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { AprilTagFamily } from "apriltag";
 import tagConfig16h5 from "apriltag/families/16h5.json";
 import tagConfig25h9 from "apriltag/families/25h9.json";
@@ -62,88 +63,99 @@ export default function Page() {
               ? tag16h5.render(Math.min(tagId, tagConfig16h5.codes.length - 1))
               : tagFamily === "tag25h9"
                 ? tag25h9.render(
-                    Math.min(tagId, tagConfig25h9.codes.length - 1),
+                    Math.min(tagId, tagConfig25h9.codes.length - 1)
                   )
                 : tagFamily === "tag36h9"
                   ? tag36h9.render(
-                      Math.min(tagId, tagConfig36h9.codes.length - 1),
+                      Math.min(tagId, tagConfig36h9.codes.length - 1)
                     )
                   : tagFamily === "tag36h10"
                     ? tag36h10.render(
-                        Math.min(tagId, tagConfig36h10.codes.length - 1),
+                        Math.min(tagId, tagConfig36h10.codes.length - 1)
                       )
                     : tagFamily === "tagCircle21h7"
                       ? tagCircle21h7.render(
-                          Math.min(tagId, tagConfigCircle21h7.codes.length - 1),
+                          Math.min(tagId, tagConfigCircle21h7.codes.length - 1)
                         )
                       : tagFamily === "tagCircle49h12"
                         ? tagCircle49h12.render(
                             Math.min(
                               tagId,
-                              tagConfigCircle49h12.codes.length - 1,
-                            ),
+                              tagConfigCircle49h12.codes.length - 1
+                            )
                           )
                         : tagFamily === "tagCustom48h12"
                           ? tagCustom48h12.render(
                               Math.min(
                                 tagId,
-                                tagConfigCustom48h12.codes.length - 1,
-                              ),
+                                tagConfigCustom48h12.codes.length - 1
+                              )
                             )
                           : tagFamily === "tagStandard41h12"
                             ? tagStandard41h12.render(
                                 Math.min(
                                   tagId,
-                                  tagConfigStandard41h12.codes.length - 1,
-                                ),
+                                  tagConfigStandard41h12.codes.length - 1
+                                )
                               )
                             : tagFamily === "tagStandard52h13"
                               ? tagStandard52h13.render(
                                   Math.min(
                                     tagId,
-                                    tagConfigStandard52h13.codes.length - 1,
-                                  ),
+                                    tagConfigStandard52h13.codes.length - 1
+                                  )
                                 )
                               : null) || [[]]
         }
         id="tag"
       />
-      <div className="flex flex-row gap-2">
-        <Input
-          type="number"
-          placeholder="tag id"
-          value={tagId}
-          min={0}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (!isNaN(Number(value))) {
-              setTagId(Number(value));
-            }
-          }}
-        />
-        <Select
-          value={tagFamily}
-          onValueChange={(value) => {
-            setTagFamily(value);
-            console.log(value);
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="select a tag family" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="tag16h5">16h5</SelectItem>
-            <SelectItem value="tag25h9">25h9</SelectItem>
-            <SelectItem value="tag36h9">36h9</SelectItem>
-            <SelectItem value="tag36h10">36h10</SelectItem>
-            <SelectItem value="tag36h11">36h11</SelectItem>
-            <SelectItem value="tagCircle21h7">circle 21h7</SelectItem>
-            <SelectItem value="tagCircle49h12">circle 49h12</SelectItem>
-            <SelectItem value="tagCustom48h12">custom 48h12</SelectItem>
-            <SelectItem value="tagStandard41h12">standard 41h12</SelectItem>
-            <SelectItem value="tagStandard52h13">standard 52h13</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex flex-row gap-4 items-end">
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="tag-id">
+            tag id
+          </Label>
+          <Input
+            id="tag-id"
+            type="number"
+            placeholder="12"
+            value={tagId}
+            min={0}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (!isNaN(Number(value))) {
+                setTagId(Number(value));
+              }
+            }}
+          />
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="tag-family">
+            tag family
+          </Label>
+          <Select
+            value={tagFamily}
+            onValueChange={(value) => {
+              setTagFamily(value);
+              console.log(value);
+            }}
+          >
+            <SelectTrigger id="tag-family">
+              <SelectValue placeholder="36h11" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="tag16h5">16h5</SelectItem>
+              <SelectItem value="tag25h9">25h9</SelectItem>
+              <SelectItem value="tag36h9">36h9</SelectItem>
+              <SelectItem value="tag36h10">36h10</SelectItem>
+              <SelectItem value="tag36h11">36h11</SelectItem>
+              <SelectItem value="tagCircle21h7">circle 21h7</SelectItem>
+              <SelectItem value="tagCircle49h12">circle 49h12</SelectItem>
+              <SelectItem value="tagCustom48h12">custom 48h12</SelectItem>
+              <SelectItem value="tagStandard41h12">standard 41h12</SelectItem>
+              <SelectItem value="tagStandard52h13">standard 52h13</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <Button onClick={handleDownload}>download</Button>
       </div>
     </div>

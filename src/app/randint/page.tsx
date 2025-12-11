@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
 export default function Page() {
@@ -15,25 +16,45 @@ export default function Page() {
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
-      <p className="text-9xl font-bold" onClick={() => setResult(null)}>
+      <p
+        className="text-9xl font-bold cursor-pointer"
+        onClick={() => setResult(null)}
+      >
         {result}
       </p>
       {!result && (
-        <>
-          <Input
-            type="number"
-            placeholder="min"
-            defaultValue={min}
-            onChange={(e) => setMin(Number(e.target.value))}
-          />
-          <Input
-            type="number"
-            placeholder="max"
-            defaultValue={max}
-            onChange={(e) => setMax(Number(e.target.value))}
-          />
-          <Button onClick={handleRoll}>roll</Button>
-        </>
+        <div className="flex flex-row gap-4 items-end">
+          <div className="flex flex-col">
+            <Label className="mb-1" htmlFor="randint-min">
+              minimum value
+            </Label>
+            <Input
+              id="randint-min"
+              type="number"
+              placeholder="1"
+              defaultValue={min}
+              onChange={(e) => setMin(Number(e.target.value))}
+            />
+          </div>
+          <div className="flex flex-col">
+            <Label className="mb-1" htmlFor="randint-max">
+              maximum value
+            </Label>
+            <Input
+              id="randint-max"
+              type="number"
+              placeholder="20"
+              defaultValue={max}
+              onChange={(e) => setMax(Number(e.target.value))}
+            />
+          </div>
+          <Button
+            onClick={handleRoll}
+            disabled={min === null || max === null || min >= max}
+          >
+            roll
+          </Button>
+        </div>
       )}
     </div>
   );
