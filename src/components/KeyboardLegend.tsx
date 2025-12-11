@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { useImmersiveMode } from "@/components/ImmersiveModeProvider";
 
 export function KeyboardLegend() {
   const { isMobile, open } = useSidebar();
+  const { isImmersive } = useImmersiveMode();
   const [isOpen, setIsOpen] = useState(false);
 
   const shortcuts = [
@@ -17,6 +19,10 @@ export function KeyboardLegend() {
     {
       keys: ["ctrl", "`"],
       description: "toggle sidebar",
+    },
+    {
+      keys: ["ctrl", "i"],
+      description: "toggle immersive mode",
     },
   ];
 
@@ -44,19 +50,21 @@ export function KeyboardLegend() {
 
   return (
     <>
-      <div
-        className="fixed bottom-2 z-50 bg-background transition-all duration-200 ease-linear flex flex-row items-center gap-4"
-        style={{ left: open ? "calc(16rem + 0.5rem)" : "0.5rem" }}
-      >
-        <p className="text-muted-foreground text-sm">
-          <KbdGroup className="mr-1">
-            <Kbd>ctrl</Kbd>
-            <span>+</span>
-            <Kbd>?</Kbd>
-          </KbdGroup>
-          view keyboard shortcuts
-        </p>
-      </div>
+      {!isImmersive && (
+        <div
+          className="fixed bottom-2 z-50 bg-background transition-all duration-200 ease-linear flex flex-row items-center gap-4"
+          style={{ left: open ? "calc(16rem + 0.5rem)" : "0.5rem" }}
+        >
+          <p className="text-muted-foreground text-sm">
+            <KbdGroup className="mr-1">
+              <Kbd>ctrl</Kbd>
+              <span>+</span>
+              <Kbd>?</Kbd>
+            </KbdGroup>
+            view keyboard shortcuts
+          </p>
+        </div>
+      )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
