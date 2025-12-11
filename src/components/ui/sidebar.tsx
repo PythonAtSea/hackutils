@@ -30,7 +30,6 @@ const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "16rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
-const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
 type SidebarContextProps = {
   state: "expanded" | "collapsed";
@@ -91,10 +90,7 @@ function SidebarProvider({
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const isToggleKey =
-        event.key === SIDEBAR_KEYBOARD_SHORTCUT ||
-        event.key === "`" ||
-        event.code === "Backquote";
+      const isToggleKey = event.key === "`" || event.code === "Backquote";
 
       if (isToggleKey && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();

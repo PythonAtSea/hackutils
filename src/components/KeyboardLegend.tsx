@@ -24,6 +24,10 @@ export function KeyboardLegend() {
       keys: ["ctrl", "i"],
       description: "toggle immersive mode",
     },
+    {
+      keys: ["ctrl", "m"],
+      description: "toggle dark mode",
+    },
   ];
 
   useEffect(() => {
