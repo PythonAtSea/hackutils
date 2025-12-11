@@ -7,6 +7,7 @@ export default function Page() {
   const [elapsed, setElapsed] = useState(0);
   const [running, setRunning] = useState(false);
   const [laps, setLaps] = useState<number[]>([]);
+  const [lapWidth, setLapWidth] = useState<number>(0);
   const startTimeRef = useRef<Date | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -53,6 +54,7 @@ export default function Page() {
     const lapTime = elapsed - (laps.reduce((a, b) => a + b, 0) || 0);
     const newLaps = [...laps, lapTime];
     setLaps(newLaps);
+    setLapWidth(String(newLaps.length).length);
   };
 
   const formatTime = (ms: number) => {
@@ -65,8 +67,8 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
-      <div className="flex flex-row items-center justify-center py-2 gap-4">
+    <div className="w-full flex flex-col items-center">
+      <div className="mt-[50vh] -translate-y-1/2 flex flex-row items-center justify-center gap-4">
         <h1 className="text-4xl font-bold">{formatTime(elapsed)}</h1>
         {!running && (
           <>
@@ -90,9 +92,15 @@ export default function Page() {
         )}
       </div>
       {laps.length > 0 && (
-        <div className="flex flex-col items-center justify-center py-2 gap-4">
+        <div className="flex flex-col items-center gap-4 mt-8 pb-0">
           {laps.map((lap, index) => (
-            <div key={index} className={`text-2xl font-bold `}>
+            <div
+              key={index}
+              className={`text-2xl font-bold gap-2 flex flex-row items-center ${lap === Math.min(...laps) && laps.length > 2 ? "text-green-400" : ""} ${lap === Math.max(...laps) && laps.length > 2 ? "text-red-500" : ""}`}
+            >
+              <span className="text-muted-foreground text-sm">
+                lap {(index + 1).toString().padStart(lapWidth, "0")}:{" "}
+              </span>
               {formatTime(lap)}
             </div>
           ))}
