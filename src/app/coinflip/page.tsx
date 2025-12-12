@@ -7,14 +7,20 @@ export default function Page() {
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
-      <p onClick={() => setResult(null)} className="text-3xl text-bold">
+      <p
+        onClick={() => setResult(null)}
+        className="text-9xl text-bold cursor-pointer select-none"
+      >
         {result}
       </p>
-      <Button
-        onClick={() => setResult(Math.random() < 0.5 ? "heads" : "tails")}
-      >
-        flip
-      </Button>
+      {!result && (
+        <Button
+          className="select-none"
+          onClick={() => setResult(Math.random() < 0.5 ? "heads" : "tails")}
+        >
+          flip
+        </Button>
+      )}
     </div>
   );
 }
