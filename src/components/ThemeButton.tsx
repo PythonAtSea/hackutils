@@ -35,7 +35,7 @@ export function ThemeButton() {
 
   return (
     <button
-      className="fixed top-2 right-2 size-7 flex flex-row items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50"
+      className="fixed top-2 right-2 size-7 flex flex-row items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 active:scale-[0.97] transition-transform cursor-pointer"
       onClick={toggleTheme}
     >
       <Moon className="size-4 dark:scale-0" />
