@@ -36,25 +36,122 @@ export default function Page() {
   const tagStandard52h13 = new AprilTagFamily(tagConfigStandard52h13);
   const [tagId, setTagId] = useState(0);
   const [tagFamily, setTagFamily] = useState("tag36h11");
+  const [format, setFormat] = useState<"svg" | "png">("svg");
 
   const handleDownload = () => {
     const svg = document.getElementById("tag");
     if (!svg) return;
     const svgData = new XMLSerializer().serializeToString(svg);
-    const svgBlob = new Blob([svgData], {
-      type: "image/svg+xml;charset=utf-8",
-    });
-    const url = URL.createObjectURL(svgBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "apriltag.svg";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (format === "svg") {
+      const svgBlob = new Blob([svgData], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const url = URL.createObjectURL(svgBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "apriltag.svg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      return;
+    }
+
+    const viewBox = svg.getAttribute("viewBox")?.split(" ");
+    const width = Number(viewBox?.[2]) || svg.clientWidth || 400;
+    const height = Number(viewBox?.[3]) || svg.clientHeight || 400;
+    const url = URL.createObjectURL(
+      new Blob([svgData], { type: "image/svg+xml;charset=utf-8" })
+    );
+    const image = new Image();
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.drawImage(image, 0, 0, width, height);
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const pngUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = pngUrl;
+        link.download = "apriltag.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(pngUrl);
+      });
+      URL.revokeObjectURL(url);
+    };
+    image.src = url;
   };
 
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
+      <div className="flex flex-row gap-4 items-end">
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="tag-id">
+            tag id
+          </Label>
+          <Input
+            id="tag-id"
+            type="number"
+            placeholder="12"
+            value={tagId}
+            min={0}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (!isNaN(Number(value))) {
+                setTagId(Number(value));
+              }
+            }}
+          />
+        </div>
+        <div className="flex flex-col">
+          <Label className="mb-1" htmlFor="tag-family">
+            tag family
+          </Label>
+          <Select
+            value={tagFamily}
+            onValueChange={(value) => {
+              setTagFamily(value);
+              console.log(value);
+            }}
+          >
+            <SelectTrigger id="tag-family">
+              <SelectValue placeholder="36h11" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="tag16h5">16h5</SelectItem>
+              <SelectItem value="tag25h9">25h9</SelectItem>
+              <SelectItem value="tag36h9">36h9</SelectItem>
+              <SelectItem value="tag36h10">36h10</SelectItem>
+              <SelectItem value="tag36h11">36h11</SelectItem>
+              <SelectItem value="tagCircle21h7">circle 21h7</SelectItem>
+              <SelectItem value="tagCircle49h12">circle 49h12</SelectItem>
+              <SelectItem value="tagCustom48h12">custom 48h12</SelectItem>
+              <SelectItem value="tagStandard41h12">standard 41h12</SelectItem>
+              <SelectItem value="tagStandard52h13">standard 52h13</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <Label>output format</Label>
+          <Select
+            value={format}
+            onValueChange={(value) => setFormat(value as "svg" | "png")}
+          >
+            <SelectTrigger className="w-[120px]" aria-label="output format">
+              <SelectValue placeholder="format" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="svg">SVG</SelectItem>
+              <SelectItem value="png">PNG</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <Button onClick={handleDownload}>download</Button>
+      </div>
       <GridToSVG
         grid={
           (tagFamily === "tag36h11"
@@ -109,55 +206,6 @@ export default function Page() {
         }
         id="tag"
       />
-      <div className="flex flex-row gap-4 items-end">
-        <div className="flex flex-col">
-          <Label className="mb-1" htmlFor="tag-id">
-            tag id
-          </Label>
-          <Input
-            id="tag-id"
-            type="number"
-            placeholder="12"
-            value={tagId}
-            min={0}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (!isNaN(Number(value))) {
-                setTagId(Number(value));
-              }
-            }}
-          />
-        </div>
-        <div className="flex flex-col">
-          <Label className="mb-1" htmlFor="tag-family">
-            tag family
-          </Label>
-          <Select
-            value={tagFamily}
-            onValueChange={(value) => {
-              setTagFamily(value);
-              console.log(value);
-            }}
-          >
-            <SelectTrigger id="tag-family">
-              <SelectValue placeholder="36h11" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="tag16h5">16h5</SelectItem>
-              <SelectItem value="tag25h9">25h9</SelectItem>
-              <SelectItem value="tag36h9">36h9</SelectItem>
-              <SelectItem value="tag36h10">36h10</SelectItem>
-              <SelectItem value="tag36h11">36h11</SelectItem>
-              <SelectItem value="tagCircle21h7">circle 21h7</SelectItem>
-              <SelectItem value="tagCircle49h12">circle 49h12</SelectItem>
-              <SelectItem value="tagCustom48h12">custom 48h12</SelectItem>
-              <SelectItem value="tagStandard41h12">standard 41h12</SelectItem>
-              <SelectItem value="tagStandard52h13">standard 52h13</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <Button onClick={handleDownload}>download</Button>
-      </div>
     </div>
   );
 }
