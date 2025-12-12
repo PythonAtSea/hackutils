@@ -68,31 +68,31 @@ export default function Page() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="mt-[50vh] -translate-y-1/2 flex flex-row items-center justify-center gap-4">
-        <h1 className="text-4xl font-bold">{formatTime(elapsed)}</h1>
+      <div className="mt-[50vh] -translate-y-1/2 flex flex-col items-center justify-center gap-4">
+        <h1 className="text-9xl font-bold">{formatTime(elapsed)}</h1>
         {!running && (
-          <>
+          <div className="flex flex-row gap-4">
             <Button onClick={handleStart} className="w-20">
               start
             </Button>
             <Button variant="outline" onClick={handleReset} className="w-20">
               reset
             </Button>
-          </>
+          </div>
         )}
         {running && (
-          <>
+          <div className="flex flex-row gap-4">
             <Button onClick={handleStop} className="w-20">
               stop
             </Button>
             <Button variant="outline" className="w-20" onClick={handleLap}>
               lap
             </Button>
-          </>
+          </div>
         )}
       </div>
       {laps.length > 0 && (
-        <div className="flex flex-col items-center gap-4 mt-8 pb-0">
+        <div className="flex flex-col items-center gap-4">
           {laps.map((lap, index) => (
             <div
               key={index}
