@@ -53,6 +53,93 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const sidebarLinks = [
+    {
+      name: "time",
+      items: [
+        {
+          name: "stopwatch",
+          href: "/stopwatch",
+          icon: <Timer className="size-4" />,
+        },
+        {
+          name: "clock",
+          href: "/clock",
+          icon: <Clock className="size-4" />,
+        },
+        {
+          name: "countdown",
+          href: "/countdown",
+          icon: <AlarmClock className="size-4" />,
+        },
+      ],
+    },
+    {
+      name: "unit conversions",
+      items: [
+        {
+          name: "temperature",
+          href: "/temperature",
+          icon: <Thermometer className="size-4" />,
+        },
+        {
+          name: "length",
+          href: "/length",
+          icon: <RulerDimensionLine className="size-4" />,
+        },
+        {
+          name: "weight",
+          href: "/weight",
+          icon: <Anvil className="size-4" />,
+        },
+      ],
+    },
+    {
+      name: "random",
+      items: [
+        {
+          name: "uuid",
+          href: "/uuid",
+          icon: <Gpu className="size-4" />,
+        },
+        {
+          name: "coin flip",
+          href: "/coinflip",
+          icon: <HandCoins className="size-4" />,
+        },
+        {
+          name: "randint",
+          href: "/randint",
+          icon: <Dices className="size-4" />,
+        },
+        {
+          name: "hash",
+          href: "/hash",
+          icon: <Hash className="size-4" />,
+        },
+      ],
+    },
+    {
+      name: "visual codes",
+      items: [
+        {
+          name: "qr code",
+          href: "/qrcode",
+          icon: <QrCode className="size-4" />,
+        },
+        {
+          name: "apriltag",
+          href: "/apriltag",
+          icon: <ScanSearch className="size-4" />,
+        },
+        {
+          name: "datamatrix",
+          href: "/datamatrix",
+          icon: <ScanLine className="size-4" />,
+        },
+      ],
+    },
+  ];
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistMono.variable} antialiased`}>
@@ -73,138 +160,29 @@ export default function RootLayout({
                   </div>
                 </SidebarHeader>
                 <SidebarContent>
-                  <SidebarGroup>
-                    <SidebarGroupLabel>time</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/stopwatch">
-                              <Timer className="size-4" />
-                              <span>stopwatch</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/clock">
-                              <Clock className="size-4" />
-                              <span>clock</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/countdown">
-                              <AlarmClock className="size-4" />
-                              <span>countdown</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
-                  <SidebarGroup>
-                    <SidebarGroupLabel>unit conversions</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/temperature">
-                              <Thermometer className="size-4" />
-                              <span>temperature</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/length">
-                              <RulerDimensionLine className="size-4" />
-                              <span>length</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/weight">
-                              <Anvil className="size-4" />
-                              <span>weight</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
-                  <SidebarGroup>
-                    <SidebarGroupLabel>random</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/uuid">
-                              <Gpu className="size-4" />
-                              <span>uuid</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/coinflip">
-                              <HandCoins className="size-4" />
-                              <span>coin flip</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/randint">
-                              <Dices className="size-4" />
-                              <span>randint</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/hash">
-                              <Hash className="size-4" />
-                              <span>hash</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
-                  <SidebarGroup>
-                    <SidebarGroupLabel>visual codes</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/qrcode">
-                              <QrCode className="size-4" />
-                              <span>qr code</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/apriltag">
-                              <ScanSearch className="size-4" />
-                              <span>apriltag</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <Link href="/datamatrix">
-                              <ScanLine className="size-4" />
-                              <span>datamatrix</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
+                  {sidebarLinks.map((group) => {
+                    return (
+                      <SidebarGroup key={group.name}>
+                        <SidebarGroupLabel>{group.name}</SidebarGroupLabel>
+                        <SidebarGroupContent>
+                          <SidebarMenu>
+                            {group.items.map((item) => {
+                              return (
+                                <SidebarMenuItem key={item.name}>
+                                  <SidebarMenuButton asChild>
+                                    <Link href={item.href}>
+                                      {item.icon}
+                                      <span>{item.name}</span>
+                                    </Link>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              );
+                            })}
+                          </SidebarMenu>
+                        </SidebarGroupContent>
+                      </SidebarGroup>
+                    );
+                  })}
                 </SidebarContent>
                 <SidebarFooter>
                   <div className="flex flex-col gap-2 p-2 text-sm">
