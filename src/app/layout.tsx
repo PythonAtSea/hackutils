@@ -193,7 +193,12 @@ export default function RootLayout({
                         className="inline-block animate-pulse text-red-800 [animation-duration:3s] mx-2"
                       />
                       by{" "}
-                      <Link href="https://github.com/pythonatsea">
+                      <Link
+                        href="https://github.com/pythonatsea"
+                        className="text-blue-500 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         pythonatsea
                       </Link>
                     </p>
