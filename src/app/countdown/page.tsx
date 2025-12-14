@@ -11,7 +11,6 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon } from "lucide-react";
 import SwapIcon from "@/components/IconSwapper";
-import { Progress } from "@/components/ui/progress";
 
 export default function Page() {
   const getNextOClock = () => {
@@ -131,8 +130,16 @@ export default function Page() {
 
   const handlePauseToggle = () => {
     if (paused) {
-      const pausedDuration = new Date().getTime() - (pausedAt?.getTime() || 0);
+      const nowTime = new Date();
+      const pausedDuration = nowTime.getTime() - (pausedAt?.getTime() || 0);
       setTotalPausedDuration(totalPausedDuration + pausedDuration);
+      if (targetTime) {
+        setTargetTime(new Date(targetTime.getTime() + pausedDuration));
+      }
+      if (startTime) {
+        setStartTime(new Date(startTime.getTime() + pausedDuration));
+      }
+      setNow(nowTime);
       setPausedAt(null);
       setPaused(false);
     } else {
@@ -282,32 +289,34 @@ export default function Page() {
           <h1 className="text-9xl font-bold">
             {formatTime(endTime.getTime() - now.getTime())}
           </h1>
-          <Progress
-            value={
-              startTime && endTime
-                ? endTime.getTime() - startTime.getTime() > 0
-                  ? Math.max(
-                      0,
-                      Math.min(
-                        100,
-                        ((now.getTime() -
-                          startTime.getTime() -
-                          totalPausedDuration) /
-                          (endTime.getTime() - startTime.getTime())) *
-                          100
-                      )
-                    )
-                  : 100
-                : 0
-            }
-            className={
-              endTime.getTime() - now.getTime() <= 10000
-                ? "bg-red-600"
-                : endTime.getTime() - now.getTime() <= 30000
-                  ? "bg-yellow-600"
-                  : ""
-            }
-          />
+          <div className="w-full h-4 bg-muted rounded-md overflow-hidden items-end flex flex-row-reverse">
+            <div
+              className={`h-full rounded-md ${
+                endTime.getTime() - now.getTime() <= 10000
+                  ? "bg-red-500"
+                  : endTime.getTime() - now.getTime() <= 30000
+                    ? "bg-yellow-500"
+                    : "bg-white"
+              }`}
+              style={{
+                width: `${
+                  startTime && endTime
+                    ? endTime.getTime() - startTime.getTime() > 0
+                      ? Math.max(
+                          0,
+                          Math.min(
+                            100,
+                            ((endTime.getTime() - now.getTime()) /
+                              (endTime.getTime() - startTime.getTime())) *
+                              100
+                          )
+                        )
+                      : 0
+                    : 100
+                }%`,
+              }}
+            ></div>
+          </div>
           <div className="flex flex-row gap-2">
             <Button
               onClick={() => setRunning(false)}
