@@ -11,6 +11,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon } from "lucide-react";
 import SwapIcon from "@/components/IconSwapper";
+import { Progress } from "@/components/ui/progress";
 
 export default function Page() {
   const [now, setNow] = useState(new Date());
@@ -20,17 +21,45 @@ export default function Page() {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState("12:00:00");
+  const [hours, setHours] = useState("0");
+  const [minutes, setMinutes] = useState("0");
+  const [seconds, setSeconds] = useState("0");
 
-  const getEndTime = (): Date | null => {
+  const getEndTimeFromDate = (): Date | null => {
     if (!selectedDate) return null;
-    const [hours, minutes, seconds] = selectedTime.split(":").map(Number);
+    const [h, m, s] = selectedTime.split(":").map(Number);
     const endTime = new Date(selectedDate);
-    endTime.setHours(hours || 0, minutes || 0, seconds || 0, 0);
+    endTime.setHours(h || 0, m || 0, s || 0, 0);
+    return endTime;
+  };
+
+  const getEndTimeFromHms = (): Date | null => {
+    const h = parseInt(hours) || 0;
+    const m = parseInt(minutes) || 0;
+    const s = parseInt(seconds) || 0;
+
+    if (h === 0 && m === 0 && s === 0) {
+      return null;
+    }
+
+    const now = new Date();
+    const endTime = new Date(
+      now.getTime() + h * 3600000 + m * 60000 + s * 1000
+    );
     return endTime;
   };
 
   const handleStart = () => {
-    const end = getEndTime();
+    const end = getEndTimeFromDate();
+    if (end && new Date() <= end) {
+      setStartTime(new Date());
+      setTargetTime(end);
+      setRunning(true);
+    }
+  };
+
+  const handleStartFromHms = () => {
+    const end = getEndTimeFromHms();
     if (end) {
       setStartTime(new Date());
       setTargetTime(end);
@@ -75,67 +104,129 @@ export default function Page() {
       .padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
   };
 
-  const endTime = running ? targetTime : getEndTime();
+  const endTime = running ? targetTime : getEndTimeFromDate();
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
       {!running && (
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-row items-end gap-4">
-            <div className="flex flex-col">
-              <Label className="mb-1" htmlFor="date-picker">
-                date
-              </Label>
-              <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    id="date-picker"
-                    className="justify-between font-normal w-35 border-input"
-                  >
-                    {selectedDate
-                      ? selectedDate.toLocaleDateString()
-                      : "7/12/1941"}
-                    <ChevronDownIcon />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                  className="w-auto overflow-hidden p-0"
-                  align="start"
-                >
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={(date) => {
-                      setSelectedDate(date);
-                      setCalendarOpen(false);
-                    }}
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
+            <div>
+              <div className="flex flex-row items-end gap-2">
+                <div className="flex flex-col">
+                  <Label className="mb-1" htmlFor="date-picker">
+                    date
+                  </Label>
+                  <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        id="date-picker"
+                        className="justify-between font-normal w-35 border-input"
+                      >
+                        {selectedDate
+                          ? selectedDate.toLocaleDateString()
+                          : "7/12/1941"}
+                        <ChevronDownIcon />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-auto overflow-hidden p-0"
+                      align="start"
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={(date) => {
+                          setSelectedDate(date);
+                          setCalendarOpen(false);
+                        }}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                <div className="flex flex-col">
+                  <Label className="mb-1" htmlFor="time-picker">
+                    time
+                  </Label>
+                  <Input
+                    type="time"
+                    id="time-picker"
+                    step="1"
+                    placeholder="23:59:59"
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                    className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                   />
-                </PopoverContent>
-              </Popover>
+                </div>
+              </div>
+              <Button
+                onClick={handleStart}
+                disabled={
+                  !getEndTimeFromDate() || new Date() > getEndTimeFromDate()!
+                }
+                className="w-full mt-2"
+              >
+                <SwapIcon name="start" />
+              </Button>
             </div>
-            <div className="flex flex-col">
-              <Label className="mb-1" htmlFor="time-picker">
-                time
-              </Label>
-              <Input
-                type="time"
-                id="time-picker"
-                step="1"
-                placeholder="23:59:59"
-                value={selectedTime}
-                onChange={(e) => setSelectedTime(e.target.value)}
-                className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-              />
+            <div>
+              <div className="flex flex-row items-end gap-2">
+                <div className="flex flex-col">
+                  <Label className="mb-1" htmlFor="hours-input">
+                    hours
+                  </Label>
+                  <Input
+                    type="number"
+                    id="hours-input"
+                    min="0"
+                    placeholder="0"
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                    className="bg-background w-32"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <Label className="mb-1" htmlFor="minutes-input">
+                    minutes
+                  </Label>
+                  <Input
+                    type="number"
+                    id="minutes-input"
+                    min="0"
+                    max="59"
+                    placeholder="0"
+                    value={minutes}
+                    onChange={(e) => setMinutes(e.target.value)}
+                    className="bg-background w-32"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <Label className="mb-1" htmlFor="seconds-input">
+                    seconds
+                  </Label>
+                  <Input
+                    type="number"
+                    id="seconds-input"
+                    min="0"
+                    max="59"
+                    placeholder="0"
+                    value={seconds}
+                    onChange={(e) => setSeconds(e.target.value)}
+                    className="bg-background w-32"
+                  />
+                </div>
+              </div>
+              <Button
+                onClick={handleStartFromHms}
+                disabled={getEndTimeFromHms() === null}
+                className="w-full mt-2"
+              >
+                <SwapIcon name="start" />
+              </Button>
             </div>
           </div>
-          <Button
-            onClick={handleStart}
-            disabled={!endTime || new Date() > endTime}
-          >
-            <SwapIcon name="start" />
-          </Button>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <Button onClick={() => handleQuickStart(1)} variant="outline">
               1 minute
             </Button>
@@ -156,6 +247,30 @@ export default function Page() {
           <h1 className="text-9xl font-bold">
             {formatTime(endTime.getTime() - now.getTime())}
           </h1>
+          <Progress
+            value={
+              startTime && endTime
+                ? endTime.getTime() - startTime.getTime() > 0
+                  ? Math.max(
+                      0,
+                      Math.min(
+                        100,
+                        ((now.getTime() - startTime.getTime()) /
+                          (endTime.getTime() - startTime.getTime())) *
+                          100
+                      )
+                    )
+                  : 100
+                : 0
+            }
+            className={
+              endTime.getTime() - now.getTime() <= 10000
+                ? "bg-red-600"
+                : endTime.getTime() - now.getTime() <= 30000
+                  ? "bg-yellow-600"
+                  : ""
+            }
+          />
           <Button
             onClick={() => setRunning(false)}
             variant={
