@@ -15,6 +15,8 @@ import SwapIcon from "@/components/IconSwapper";
 export default function Page() {
   const [now, setNow] = useState(new Date());
   const [running, setRunning] = useState(false);
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [targetTime, setTargetTime] = useState<Date | null>(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState("12:00:00");
@@ -28,9 +30,27 @@ export default function Page() {
   };
 
   const handleStart = () => {
-    if (getEndTime()) {
+    const end = getEndTime();
+    if (end) {
+      setStartTime(new Date());
+      setTargetTime(end);
       setRunning(true);
     }
+  };
+
+  const handleQuickStart = (minutes: number) => {
+    const start = new Date();
+    const end = new Date(start.getTime() + minutes * 60000);
+    setStartTime(start);
+    setTargetTime(end);
+    setSelectedDate(end);
+    setSelectedTime(
+      `${end.getHours().toString().padStart(2, "0")}:${end
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}:${end.getSeconds().toString().padStart(2, "0")}`
+    );
+    setRunning(true);
   };
 
   useEffect(() => {
@@ -55,7 +75,7 @@ export default function Page() {
       .padStart(2, "0")}.${milliseconds.toString().padStart(3, "0")}`;
   };
 
-  const endTime = getEndTime();
+  const endTime = running ? targetTime : getEndTime();
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
@@ -109,9 +129,26 @@ export default function Page() {
               />
             </div>
           </div>
-          <Button onClick={handleStart} disabled={!selectedDate}>
+          <Button
+            onClick={handleStart}
+            disabled={!endTime || new Date() > endTime}
+          >
             <SwapIcon name="start" />
           </Button>
+          <div className="grid grid-cols-2 gap-4">
+            <Button onClick={() => handleQuickStart(1)} variant="outline">
+              1 minute
+            </Button>
+            <Button onClick={() => handleQuickStart(5)} variant="outline">
+              5 minutes
+            </Button>
+            <Button onClick={() => handleQuickStart(30)} variant="outline">
+              30 minutes
+            </Button>
+            <Button onClick={() => handleQuickStart(60)} variant="outline">
+              1 hour
+            </Button>
+          </div>
         </div>
       )}
       {running && endTime && (
