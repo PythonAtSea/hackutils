@@ -11,6 +11,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon } from "lucide-react";
 import SwapIcon from "@/components/IconSwapper";
+import { useImmersiveMode } from "@/components/ImmersiveModeProvider";
 
 export default function Page() {
   const getNextOClock = () => {
@@ -37,6 +38,8 @@ export default function Page() {
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("0");
   const [seconds, setSeconds] = useState("0");
+
+  const { isImmersive } = useImmersiveMode();
 
   const getEndTimeFromDate = (): Date | null => {
     if (!selectedDate) return null;
@@ -323,7 +326,7 @@ export default function Page() {
               variant={
                 endTime.getTime() - now.getTime() <= 0 ? "default" : "outline"
               }
-              className="w-24"
+              className={isImmersive ? "w-24" : "w-fit"}
             >
               <SwapIcon
                 name={
@@ -334,7 +337,7 @@ export default function Page() {
             {endTime.getTime() - now.getTime() >= 0 && (
               <Button
                 onClick={handlePauseToggle}
-                className="w-24"
+                className={isImmersive ? "w-24" : "w-fit"}
                 variant={paused ? "default" : "outline"}
               >
                 <SwapIcon name={paused ? "resume" : "pause"} />
