@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon } from "lucide-react";
+import SwapIcon from "@/components/IconSwapper";
 
 export default function Page() {
   const [now, setNow] = useState(new Date());
@@ -109,7 +110,7 @@ export default function Page() {
             </div>
           </div>
           <Button onClick={handleStart} disabled={!selectedDate}>
-            start
+            <SwapIcon name="start" />
           </Button>
         </div>
       )}
@@ -125,7 +126,9 @@ export default function Page() {
             }
             className="w-full"
           >
-            {endTime.getTime() - now.getTime() <= 0 ? "reset" : "cancel"}
+            <SwapIcon
+              name={endTime.getTime() - now.getTime() <= 0 ? "reset" : "cancel"}
+            />
           </Button>
         </div>
       )}

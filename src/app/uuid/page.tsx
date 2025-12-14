@@ -1,4 +1,5 @@
 "use client";
+import SwapIcon from "@/components/IconSwapper";
 import { Button } from "@/components/ui/button";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -35,7 +36,9 @@ export default function Page() {
           </div>
         </>
       )}
-      <Button onClick={() => setUuid(crypto.randomUUID())}>re-roll</Button>
+      <Button onClick={() => setUuid(crypto.randomUUID())}>
+        <SwapIcon name="re-roll" />
+      </Button>
     </div>
   );
 }

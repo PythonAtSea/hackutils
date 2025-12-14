@@ -1,4 +1,6 @@
 "use client";
+import { useIconPreference } from "@/components/IconPreferenceProvider";
+import SwapIcon from "@/components/IconSwapper";
 import { Button } from "@/components/ui/button";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -10,6 +12,7 @@ export default function Page() {
   const [lapWidth, setLapWidth] = useState<number>(0);
   const startTimeRef = useRef<Date | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const { preference } = useIconPreference();
 
   useEffect(() => {
     if (running) {
@@ -72,21 +75,35 @@ export default function Page() {
         <h1 className="text-9xl font-bold">{formatTime(elapsed)}</h1>
         {!running && (
           <div className="flex flex-row gap-4">
-            <Button onClick={handleStart} className="w-20">
-              start
+            <Button
+              onClick={handleStart}
+              className={preference === "text" ? "w-20" : ""}
+            >
+              <SwapIcon name="start" />
             </Button>
-            <Button variant="outline" onClick={handleReset} className="w-20">
-              reset
+            <Button
+              variant="outline"
+              onClick={handleReset}
+              className={preference === "text" ? "w-20" : ""}
+            >
+              <SwapIcon name="reset" />
             </Button>
           </div>
         )}
         {running && (
           <div className="flex flex-row gap-4">
-            <Button onClick={handleStop} className="w-20">
-              stop
+            <Button
+              onClick={handleStop}
+              className={preference === "text" ? "w-20" : ""}
+            >
+              <SwapIcon name="pause" />
             </Button>
-            <Button variant="outline" className="w-20" onClick={handleLap}>
-              lap
+            <Button
+              variant="outline"
+              className={preference === "text" ? "w-20" : ""}
+              onClick={handleLap}
+            >
+              <SwapIcon name="lap" />
             </Button>
           </div>
         )}

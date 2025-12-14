@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import crypto from "crypto";
 import { Button } from "@/components/ui/button";
+import SwapIcon from "@/components/IconSwapper";
 
 export default function Page() {
   const [text, setText] = useState("");
@@ -62,7 +63,9 @@ export default function Page() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleHash}>hash</Button>
+        <Button onClick={handleHash}>
+          <SwapIcon name="hash" />
+        </Button>
       </div>
     </div>
   );

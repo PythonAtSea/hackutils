@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import bwipjs from "bwip-js";
 import { useState } from "react";
+import SwapIcon from "@/components/IconSwapper";
 
 export default function Page() {
   const [data, setData] = useState("");
@@ -84,7 +85,9 @@ export default function Page() {
               </SelectContent>
             </Select>
           </div>
-          <Button onClick={handleDownload}>download</Button>
+          <Button onClick={handleDownload}>
+            <SwapIcon name="download" />
+          </Button>
         </div>
       </div>
       <canvas

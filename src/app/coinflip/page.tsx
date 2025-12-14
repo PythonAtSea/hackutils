@@ -1,4 +1,5 @@
 "use client";
+import SwapIcon from "@/components/IconSwapper";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -18,7 +19,7 @@ export default function Page() {
           className="select-none"
           onClick={() => setResult(Math.random() < 0.5 ? "heads" : "tails")}
         >
-          flip
+          <SwapIcon name="flip" />
         </Button>
       )}
     </div>

@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import SwapIcon from "@/components/IconSwapper";
 
 export default function QRGenerator() {
   const [value, setValue] = useState("");
@@ -92,7 +93,9 @@ export default function QRGenerator() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleDownload}>download</Button>
+        <Button onClick={handleDownload}>
+          <SwapIcon name="download" />
+        </Button>
       </div>
       <QRCodeSVG
         value={value}

@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import SwapIcon from "@/components/IconSwapper";
 
 export default function Page() {
   const tag16h5 = new AprilTagFamily(tagConfig16h5);
@@ -150,7 +151,9 @@ export default function Page() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleDownload}>download</Button>
+        <Button onClick={handleDownload}>
+          <SwapIcon name="download" />
+        </Button>
       </div>
       <GridToSVG
         grid={

@@ -28,6 +28,10 @@ export function KeyboardLegend() {
       keys: ["ctrl", "m"],
       description: "toggle dark mode",
     },
+    {
+      keys: ["alt", "l"],
+      description: "toggle icon only mode",
+    },
   ];
 
   useEffect(() => {
@@ -65,7 +69,12 @@ export function KeyboardLegend() {
               <span>+</span>
               <Kbd>?</Kbd>
             </KbdGroup>
-            view keyboard shortcuts
+            <span
+              className="hover:underline cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            >
+              view keyboard shortcuts
+            </span>
           </p>
         </div>
       )}

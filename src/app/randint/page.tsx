@@ -1,4 +1,5 @@
 "use client";
+import SwapIcon from "@/components/IconSwapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -52,7 +53,7 @@ export default function Page() {
             onClick={handleRoll}
             disabled={min === null || max === null || min >= max}
           >
-            roll
+            <SwapIcon name="roll" />
           </Button>
         </div>
       )}
