@@ -12,6 +12,7 @@ import { useState } from "react";
 import crypto from "crypto";
 import { Button } from "@/components/ui/button";
 import SwapIcon from "@/components/IconSwapper";
+import CopyBox from "@/components/CopyBox";
 
 export default function Page() {
   const [text, setText] = useState("");
@@ -26,9 +27,6 @@ export default function Page() {
 
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
-      <p className="text-3xl font-bold break-all" onClick={() => setHash("")}>
-        {hash}
-      </p>
       <div className="flex flex-row gap-4 items-end">
         <div className="flex flex-col">
           <Label className="mb-1" htmlFor="hash-text">
@@ -63,10 +61,11 @@ export default function Page() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleHash}>
+        <Button onClick={handleHash} disabled={text === ""}>
           <SwapIcon name="hash" />
         </Button>
       </div>
+      {hash && <CopyBox>{hash}</CopyBox>}
     </div>
   );
 }
