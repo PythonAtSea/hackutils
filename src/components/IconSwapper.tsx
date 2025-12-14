@@ -34,6 +34,7 @@ export default function SwapIcon({ name }: SwapIconProps) {
     hash: <Hash />,
     download: <Download />,
     cancel: <X />,
+    resume: <Play />,
   };
   return preference === "icon" ? (
     iconMap[name] || <HelpCircle />

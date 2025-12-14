@@ -14,13 +14,27 @@ import SwapIcon from "@/components/IconSwapper";
 import { Progress } from "@/components/ui/progress";
 
 export default function Page() {
+  const getNextOClock = () => {
+    const now = new Date();
+    const nextHour =
+      now.getMinutes() === 0 && now.getSeconds() === 0
+        ? now.getHours()
+        : now.getHours() + 1;
+    return `${nextHour.toString().padStart(2, "0")}:00:00`;
+  };
+
   const [now, setNow] = useState(new Date());
   const [running, setRunning] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [targetTime, setTargetTime] = useState<Date | null>(null);
+  const [pausedAt, setPausedAt] = useState<Date | null>(null);
+  const [totalPausedDuration, setTotalPausedDuration] = useState(0);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-  const [selectedTime, setSelectedTime] = useState("12:00:00");
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date()
+  );
+  const [selectedTime, setSelectedTime] = useState(getNextOClock());
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("0");
   const [seconds, setSeconds] = useState("0");
@@ -54,6 +68,9 @@ export default function Page() {
     if (end && new Date() <= end) {
       setStartTime(new Date());
       setTargetTime(end);
+      setPaused(false);
+      setPausedAt(null);
+      setTotalPausedDuration(0);
       setRunning(true);
     }
   };
@@ -63,6 +80,9 @@ export default function Page() {
     if (end) {
       setStartTime(new Date());
       setTargetTime(end);
+      setPaused(false);
+      setPausedAt(null);
+      setTotalPausedDuration(0);
       setRunning(true);
     }
   };
@@ -79,17 +99,20 @@ export default function Page() {
         .toString()
         .padStart(2, "0")}:${end.getSeconds().toString().padStart(2, "0")}`
     );
+    setPaused(false);
+    setPausedAt(null);
+    setTotalPausedDuration(0);
     setRunning(true);
   };
 
   useEffect(() => {
-    if (running) {
+    if (running && !paused) {
       const interval = setInterval(() => {
         setNow(new Date());
       }, 1);
       return () => clearInterval(interval);
     }
-  }, [running]);
+  }, [running, paused]);
 
   const formatTime = (ms: number) => {
     ms = Math.max(0, ms);
@@ -105,6 +128,18 @@ export default function Page() {
   };
 
   const endTime = running ? targetTime : getEndTimeFromDate();
+
+  const handlePauseToggle = () => {
+    if (paused) {
+      const pausedDuration = new Date().getTime() - (pausedAt?.getTime() || 0);
+      setTotalPausedDuration(totalPausedDuration + pausedDuration);
+      setPausedAt(null);
+      setPaused(false);
+    } else {
+      setPausedAt(new Date());
+      setPaused(true);
+    }
+  };
 
   return (
     <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
@@ -122,11 +157,11 @@ export default function Page() {
                       <Button
                         variant="outline"
                         id="date-picker"
-                        className="justify-between font-normal w-35 border-input"
+                        className="justify-between font-normal w-full border-input"
                       >
                         {selectedDate
                           ? selectedDate.toLocaleDateString()
-                          : "7/12/1941"}
+                          : "Select date"}
                         <ChevronDownIcon />
                       </Button>
                     </PopoverTrigger>
@@ -156,7 +191,7 @@ export default function Page() {
                     placeholder="23:59:59"
                     value={selectedTime}
                     onChange={(e) => setSelectedTime(e.target.value)}
-                    className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                    className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none w-full"
                   />
                 </div>
               </div>
@@ -255,7 +290,9 @@ export default function Page() {
                       0,
                       Math.min(
                         100,
-                        ((now.getTime() - startTime.getTime()) /
+                        ((now.getTime() -
+                          startTime.getTime() -
+                          totalPausedDuration) /
                           (endTime.getTime() - startTime.getTime())) *
                           100
                       )
@@ -271,17 +308,30 @@ export default function Page() {
                   : ""
             }
           />
-          <Button
-            onClick={() => setRunning(false)}
-            variant={
-              endTime.getTime() - now.getTime() <= 0 ? "default" : "outline"
-            }
-            className="w-full"
-          >
-            <SwapIcon
-              name={endTime.getTime() - now.getTime() <= 0 ? "reset" : "cancel"}
-            />
-          </Button>
+          <div className="flex flex-row gap-2">
+            <Button
+              onClick={() => setRunning(false)}
+              variant={
+                endTime.getTime() - now.getTime() <= 0 ? "default" : "outline"
+              }
+              className="w-24"
+            >
+              <SwapIcon
+                name={
+                  endTime.getTime() - now.getTime() <= 0 ? "reset" : "cancel"
+                }
+              />
+            </Button>
+            {endTime.getTime() - now.getTime() >= 0 && (
+              <Button
+                onClick={handlePauseToggle}
+                className="w-24"
+                variant={paused ? "default" : "outline"}
+              >
+                <SwapIcon name={paused ? "resume" : "pause"} />
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>
