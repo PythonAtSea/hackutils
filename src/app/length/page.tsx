@@ -1,5 +1,4 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -12,10 +11,11 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import convert, { Unit } from "convert";
+import { CopyInput } from "@/components/CopyInput";
 
 export default function Page() {
-  const [leftUnit, setLeftUnit] = useState<Unit | "">("");
-  const [rightUnit, setRightUnit] = useState<Unit | "">("");
+  const [leftUnit, setLeftUnit] = useState<Unit | "">("in");
+  const [rightUnit, setRightUnit] = useState<Unit | "">("ft");
   const [leftValue, setLeftValue] = useState("");
   const [rightValue, setRightValue] = useState("");
   const [lastChanged, setLastChanged] = useState<"left" | "right" | null>(null);
@@ -95,7 +95,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="length-left-value">
             value
           </Label>
-          <Input
+          <CopyInput
             id="length-left-value"
             type="number"
             placeholder="12.5"
@@ -136,10 +136,10 @@ export default function Page() {
           <Label className="mb-1" htmlFor="length-right-value">
             value
           </Label>
-          <Input
+          <CopyInput
             id="length-right-value"
             type="number"
-            placeholder="41.0"
+            placeholder="12.5"
             onChange={handleRightValueChange}
             value={rightValue}
           />

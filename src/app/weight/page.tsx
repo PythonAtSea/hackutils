@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "@/components/ui/input";
+import { CopyInput } from "@/components/CopyInput";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -13,8 +13,8 @@ import { useState } from "react";
 import convert, { Unit } from "convert";
 
 export default function Page() {
-  const [leftUnit, setLeftUnit] = useState<Unit | "">("");
-  const [rightUnit, setRightUnit] = useState<Unit | "">("");
+  const [leftUnit, setLeftUnit] = useState<Unit | "">("pound");
+  const [rightUnit, setRightUnit] = useState<Unit | "">("kg");
   const [leftValue, setLeftValue] = useState("");
   const [rightValue, setRightValue] = useState("");
   const [lastChanged, setLastChanged] = useState<"left" | "right" | null>(null);
@@ -94,7 +94,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="weight-left-value">
             weight
           </Label>
-          <Input
+          <CopyInput
             id="weight-left-value"
             type="number"
             placeholder="3.5"
@@ -127,7 +127,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="weight-right-value">
             weight
           </Label>
-          <Input
+          <CopyInput
             id="weight-right-value"
             type="number"
             placeholder="56"

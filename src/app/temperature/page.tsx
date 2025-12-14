@@ -1,8 +1,8 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import convert from "convert";
+import { CopyInput } from "@/components/CopyInput";
 
 export default function Page() {
   const [fahrenheit, setFahrenheit] = useState<number | null>(null);
@@ -16,7 +16,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="fahrenheit">
             fahrenheit
           </Label>
-          <Input
+          <CopyInput
             type="number"
             id="fahrenheit"
             placeholder="72"
@@ -47,7 +47,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="celsius">
             celsius
           </Label>
-          <Input
+          <CopyInput
             type="number"
             id="celsius"
             placeholder="22"
@@ -78,7 +78,7 @@ export default function Page() {
           <Label className="mb-1" htmlFor="kelvin">
             kelvin
           </Label>
-          <Input
+          <CopyInput
             type="number"
             id="kelvin"
             placeholder="310"
