@@ -17,6 +17,7 @@ export default function Page() {
             fahrenheit
           </Label>
           <CopyInput
+            buttonDisabled={fahrenheit === null}
             type="number"
             id="fahrenheit"
             placeholder="72"
@@ -48,6 +49,7 @@ export default function Page() {
             celsius
           </Label>
           <CopyInput
+            buttonDisabled={fahrenheit === null}
             type="number"
             id="celsius"
             placeholder="22"
@@ -79,6 +81,7 @@ export default function Page() {
             kelvin
           </Label>
           <CopyInput
+            buttonDisabled={fahrenheit === null}
             type="number"
             id="kelvin"
             placeholder="310"

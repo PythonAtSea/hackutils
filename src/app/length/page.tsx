@@ -96,6 +96,7 @@ export default function Page() {
             value
           </Label>
           <CopyInput
+            buttonDisabled={leftValue === ""}
             id="length-left-value"
             type="number"
             placeholder="12.5"
@@ -137,6 +138,7 @@ export default function Page() {
             value
           </Label>
           <CopyInput
+            buttonDisabled={rightValue === ""}
             id="length-right-value"
             type="number"
             placeholder="12.5"

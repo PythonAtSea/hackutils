@@ -5,15 +5,17 @@ import { useState } from "react";
 
 interface CopyBoxProps {
   children: React.ReactNode;
+  disabled?: boolean;
 }
 
-export default function CopyBox({ children }: CopyBoxProps) {
+export default function CopyBox({ children, disabled = false }: CopyBoxProps) {
   const [copyIcon, setCopyIcon] = useState(<Copy size={16} className="ml-3" />);
 
   return (
     <div
-      className="rounded-md h-9 border bg-background text-center justify-center flex flex-row items-center px-3 py-2 select-none shadow-xs dark:border-input dark:bg-border/30 cursor-pointer hover:bg-accent dark:hover:bg-input/50 transition-all active:scale-[0.97]"
+      className={`rounded-md h-9 border bg-background text-center justify-center flex flex-row items-center px-3 py-2 select-none shadow-xs dark:border-input dark:bg-border/30 transition-all aria-disabled:opacity-50 ${!disabled ? "hover:bg-accent dark:hover:bg-input/50 cursor-pointer active:scale-[0.97]" : ""}`}
       onClick={() => {
+        if (disabled) return;
         navigator.clipboard.writeText(children as string);
         setCopyIcon(
           <Check
@@ -26,6 +28,7 @@ export default function CopyBox({ children }: CopyBoxProps) {
           2000
         );
       }}
+      aria-disabled={disabled}
     >
       {children}
       {copyIcon}

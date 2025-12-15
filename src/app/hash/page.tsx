@@ -60,7 +60,7 @@ export default function Page() {
           </Select>
         </div>
       </div>
-      {hash && <CopyBox>{hash}</CopyBox>}
+      {hash && <CopyBox disabled={hash.startsWith("-")}>{hash}</CopyBox>}
     </div>
   );
 }

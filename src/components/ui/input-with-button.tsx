@@ -7,10 +7,12 @@ function InputWithButton({
   type,
   button,
   onButtonClick,
+  buttonDisabled,
   ...props
 }: React.ComponentProps<"input"> & {
   button?: React.ReactNode;
   onButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
+  buttonDisabled?: boolean;
 }) {
   return (
     <div
@@ -35,7 +37,8 @@ function InputWithButton({
         type="button"
         onClick={onButtonClick}
         onMouseDown={(e) => e.preventDefault()}
-        className="m-1 rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 size-7 cursor-pointer p-1.5 flex items-center justify-center active:scale-95 transition-all"
+        className={`m-1 rounded-sm bg-primary text-primary-foreground size-7 p-1.5 flex items-center justify-center transition-all ${buttonDisabled ? "opacity-50" : "cursor-pointer hover:bg-primary/90 active:scale-95"}`}
+        disabled={buttonDisabled}
       >
         {button}
       </button>

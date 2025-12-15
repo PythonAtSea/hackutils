@@ -95,6 +95,7 @@ export default function Page() {
             weight
           </Label>
           <CopyInput
+            buttonDisabled={leftValue === ""}
             id="weight-left-value"
             type="number"
             placeholder="3.5"
@@ -128,6 +129,7 @@ export default function Page() {
             weight
           </Label>
           <CopyInput
+            buttonDisabled={rightValue === ""}
             id="weight-right-value"
             type="number"
             placeholder="56"

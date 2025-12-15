@@ -4,7 +4,11 @@ import * as React from "react";
 import { Check, Copy } from "lucide-react";
 import { InputWithButton } from "@/components/ui/input-with-button";
 
-export function CopyInput(props: React.ComponentProps<typeof InputWithButton>) {
+export function CopyInput(
+  props: React.ComponentProps<typeof InputWithButton> & {
+    buttonDisabled?: boolean;
+  }
+) {
   const [copied, setCopied] = React.useState(false);
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -18,7 +22,7 @@ export function CopyInput(props: React.ComponentProps<typeof InputWithButton>) {
 
   const handleCopy = () => {
     const value = props.value || props.defaultValue;
-    if (value) {
+    if (value && props.buttonDisabled !== true) {
       navigator.clipboard.writeText(value.toString());
       setCopied(true);
 
@@ -36,6 +40,7 @@ export function CopyInput(props: React.ComponentProps<typeof InputWithButton>) {
   return (
     <InputWithButton
       {...props}
+      buttonDisabled={props.buttonDisabled}
       onButtonClick={handleCopy}
       button={
         copied ? (
