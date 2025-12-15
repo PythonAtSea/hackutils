@@ -8,22 +8,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import crypto from "crypto";
-import { Button } from "@/components/ui/button";
-import SwapIcon from "@/components/IconSwapper";
 import CopyBox from "@/components/CopyBox";
 
 export default function Page() {
   const [text, setText] = useState("");
-  const [hash, setHash] = useState("");
+  const [hash, setHash] = useState("--------------------------------");
   const [algorithm, setAlgorithm] = useState("md5");
 
-  const handleHash = () => {
-    if (!text) return;
-    setHash("");
-    setHash(crypto.createHash(algorithm).update(text).digest("hex"));
-  };
+  useEffect(() => {
+    let newHash = "--------------------------------";
+    if (text) newHash = crypto.createHash(algorithm).update(text).digest("hex");
+    setHash(newHash);
+  }, [text, algorithm]);
 
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
@@ -61,9 +59,6 @@ export default function Page() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleHash} disabled={text === ""}>
-          <SwapIcon name="hash" />
-        </Button>
       </div>
       {hash && <CopyBox>{hash}</CopyBox>}
     </div>
