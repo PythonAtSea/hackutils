@@ -24,7 +24,7 @@ export default function Page() {
         {result}
       </p>
       {!result && (
-        <div className="flex flex-row gap-4 items-end">
+        <div className="flex flex-row gap-2 items-end">
           <div className="flex flex-col">
             <Label className="mb-1" htmlFor="randint-min">
               minimum value

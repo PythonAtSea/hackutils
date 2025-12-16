@@ -89,7 +89,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
-      <div className="flex flex-row gap-4 items-end">
+      <div className="flex flex-row gap-2 items-end">
         <div className="flex flex-col">
           <Label className="mb-1" htmlFor="tag-id">
             tag id

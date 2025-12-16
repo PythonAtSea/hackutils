@@ -58,7 +58,7 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
       <div className="flex w-full flex-col items-center">
-        <div className="flex items-end gap-4">
+        <div className="flex items-end gap-2">
           <div className="flex flex-col gap-1">
             <Label htmlFor="datamatrix-text">data to encode</Label>
             <Input

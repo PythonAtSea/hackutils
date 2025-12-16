@@ -65,7 +65,7 @@ export default function QRGenerator() {
 
   return (
     <div className="flex flex-col items-center justify-center py-2 size-full gap-4">
-      <div className="w-full flex flex-row gap-4 items-end">
+      <div className="w-full flex flex-row gap-2 items-end">
         <div className="flex w-full flex-col">
           <Label className="mb-1" htmlFor="qrcode-text">
             text or url to encode

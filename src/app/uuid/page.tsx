@@ -11,7 +11,7 @@ export default function Page() {
     setUuid(crypto.randomUUID());
   }, []);
   return (
-    <div className="flex flex-row items-center justify-center py-2 size-full gap-4">
+    <div className="flex flex-row items-center justify-center py-2 size-full gap-2">
       {uuid && <CopyBox>{uuid}</CopyBox>}
       <Button onClick={() => setUuid(crypto.randomUUID())}>
         <SwapIcon name="re-roll" />

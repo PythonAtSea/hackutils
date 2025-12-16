@@ -74,7 +74,7 @@ export default function Page() {
       <div className="mt-[50vh] -translate-y-1/2 flex flex-col items-center justify-center gap-4">
         <h1 className="text-9xl font-bold">{formatTime(elapsed)}</h1>
         {!running && (
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-2">
             <Button
               onClick={handleStart}
               className={preference === "text" ? "w-20" : ""}
@@ -91,7 +91,7 @@ export default function Page() {
           </div>
         )}
         {running && (
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-2">
             <Button
               onClick={handleStop}
               className={preference === "text" ? "w-20" : ""}
